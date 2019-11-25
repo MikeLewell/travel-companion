@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
         elevation: 11,
         paddingBottom: 20
     },
-    marginBottom40: {
-        marginBottom: 60
+    marginBottom50: {
+        marginBottom: 50
     },
     countryDescriptionText: {
         lineHeight: 20,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class CountryOverviewComponent extends Component {
+export default class CountryDetailComponent extends Component {
     constructor(props) {
         super(props);
         console.log(props);
@@ -155,14 +155,14 @@ export default class CountryOverviewComponent extends Component {
                     <TouchableHighlight style={styles.backButton} onPress={() => this.goBack()}>
                         <Text style={styles.whiteFontColor}>Back</Text>
                     </TouchableHighlight>
-                    <Text style={[styles.whiteFontColor, styles.h4, styles.marginBottom40]}>{this.state.countryInformation ? this.state.countryInformation.name : '' }</Text>
+                    <Text style={[styles.whiteFontColor, styles.h4, styles.marginBottom50]}>{this.state.countryInformation ? this.state.countryInformation.name : '' }</Text>
                 </View>
                 <View style={styles.bodySection}>
                     <View style={styles.hoistUp}>
                         <Text style={styles.countryDescriptionText}>{this.state.countryInformation ? this.state.countryInformation.description : ''}</Text>
                         {/*<Text>{this.state.countryInformation ? this.state.countryInformation.currency : ''}</Text>*/}
                         <View style={styles.locationList}>
-                            {this.state.countryInformation ? <SideSwipeListComponent input={{navigationScreen: 'LocationOverview', list: this.state.countryInformation.locationsOverview, listTitle: 'Locations'}}/> : <Text>Loading</Text>}
+                            {this.state.countryInformation ? <SideSwipeListComponent input={{navigationScreen: 'LocationDetail', list: this.state.countryInformation.locationsOverview, listTitle: 'Locations'}}/> : <Text>Loading</Text>}
                             {/*<FlatList horizontal={true} data={this.state.destinationsList}  keyExtractor={item => item.id} renderItem={({item, index}) => <LocationListItemComponent key={index} listLength={this.state.destinationsList.length} index={index} location={item}/>}/>*/}
                         </View>
                     </View>

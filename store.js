@@ -93,10 +93,14 @@ export const store = {
     },
     locations: {
         kohToa: {
-
+            name: 'Koh Toa',
+            description: 'Island off the coast of Thailand',
+            id: 'kohToa'
         },
         bangkok: {
-
+            name: 'Bangkok',
+            description: 'The capital of Thailand',
+            id: 'bangkok'
         },
         hoChiMinhCity: {
 

@@ -5,7 +5,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import MainTabNavigator from './MainTabNavigator';
 import CountryListComponent from '../screens/countryList/countryList';
 import HomeScreen from "../screens/HomeScreen";
-import CountryOverviewComponent from '../screens/country-overview/countryOverview'
+import CountryDetailComponent from '../screens/country-detail/countryDetail';
+import LocationDetailComponent from '../screens/location-detail/locationDetail'
 
 export default createAppContainer(
   // createSwitchNavigator({
@@ -23,7 +24,8 @@ export default createAppContainer(
         Main: MainTabNavigator,
         Home: {screen: HomeScreen},
         CountryList: {screen: CountryListComponent},
-        CountryOverview: {screen: CountryOverviewComponent}
+        CountryDetail: {screen: CountryDetailComponent},
+        LocationDetail: {screen: LocationDetailComponent}
     }, {
         headerMode: "none"
     })

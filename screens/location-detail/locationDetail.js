@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
     gradient: {
         position: 'absolute',
-        resizeMode: 'cover',
+        // resizeMode: 'cover',
         width: '100%',
         height: '100%'
     },
@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: -40,
         bottom: 0,
+        right: 0,
+        left: 0,
         display: 'flex',
         // justifyContent: 'space-between',
         flexDirection: 'column',
@@ -77,10 +79,10 @@ const styles = StyleSheet.create({
         elevation: 11,
         paddingBottom: 20
     },
-    marginBottom40: {
-        marginBottom: 60
+    marginBottom50: {
+        marginBottom: 50
     },
-    countryDescriptionText: {
+    descriptionText: {
         lineHeight: 20,
         padding: 20,
         color: '#3c4858',
@@ -91,26 +93,25 @@ const styles = StyleSheet.create({
     },
     backButton: {
         margin: 20,
-        fontSize: 14
+        // fontSize: 14
     }
 });
 
-export default class LocationOverviewComponent extends Component {
+export default class LocationDetailComponent extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        console.log('location detail props: ', props);
         this.state = {
             id: this.props.navigation.state.params.id
         }
     }
 
     componentDidMount() {
-        const countryInformation = store.countries.filter(countryObj => countryObj.id === this.state.id)[0];
-        console.log(countryInformation)
-        const destinationsList = store.locations[this.state.id];
+        const locationInformation = store.locations[this.state.id];
+        console.log(locationInformation)
+        // const destinationsList = store.locations[this.state.id];
         this.setState({
-            countryInformation: countryInformation,
-            destinationsList: destinationsList
+            locationInformation: locationInformation,
         })
     }
 
@@ -122,44 +123,23 @@ export default class LocationOverviewComponent extends Component {
         this.props.navigation.dispatch(popAction);
     }
 
-    // imageDecider(countryId) {
-    //     const imagePaths = {
-    //         thailand: require('../../assets/images/thailand-country-list-image.jpg'),
-    //         vietnam: require('../../assets/images/vietnam-country-list-image.jpg'),
-    //         cambodia: require('../../assets/images/cambodia-country-list-image.jpg'),
-    //         philippines: require('../../assets/images/indonesia-country-list-image.jpg'),
-    //     };
-    //     switch(countryId) {
-    //         case 'thailand':
-    //             return imagePaths.thailand;
-    //         case 'vietnam':
-    //             return imagePaths.vietnam;
-    //         case 'cambodia':
-    //             return imagePaths.cambodia;
-    //         case 'philippines':
-    //             return imagePaths.philippines;
-    //     }
-    // }
-
     render() {
         return(
             <View style={styles.flexColumn}>
                 <View style={styles.headSection}>
                     <LinearGradient style={styles.gradient} colors={['#A8BFFF', '#884D80']}/>
-                    {/*<Image source={this.imageDecider(this.state.id)} style={styles.image}/>*/}
-                    {/*<View style={styles.overlay}/>*/}
                     <TouchableHighlight style={styles.backButton} onPress={() => this.goBack()}>
                         <Text style={styles.whiteFontColor}>Back</Text>
                     </TouchableHighlight>
-                    <Text style={[styles.whiteFontColor, styles.h4, styles.marginBottom40]}>{this.state.countryInformation ? this.state.countryInformation.name : '' }</Text>
+                    <Text style={[styles.whiteFontColor, styles.h4, styles.marginBottom50]}>{this.state.locationInformation ? this.state.locationInformation.name : '' }</Text>
                 </View>
                 <View style={styles.bodySection}>
                     <View style={styles.hoistUp}>
-                        <Text style={styles.countryDescriptionText}>{this.state.countryInformation ? this.state.countryInformation.description : ''}</Text>
+                        <Text style={styles.descriptionText}>{this.state.locationInformation ? this.state.locationInformation.description : ''}</Text>
                         {/*<Text>{this.state.countryInformation ? this.state.countryInformation.currency : ''}</Text>*/}
-                        <View style={styles.locationList}>
-                            {this.state.destinationsList ? <SideSwipeListComponent input={{navigationScreen: 'LocationOverview', list: this.state.destinationsList, listTitle: 'Attractions'}}/> : <Text>Loading</Text>}
-                        </View>
+                        {/*<View style={styles.locationList}>*/}
+                            {/*{this.state.destinationsList ? <SideSwipeListComponent input={{navigationScreen: 'LocationOverview', list: this.state.destinationsList, listTitle: 'Attractions'}}/> : <Text>Loading</Text>}*/}
+                        {/*</View>*/}
                     </View>
                 </View>
             </View>

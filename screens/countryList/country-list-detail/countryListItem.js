@@ -92,7 +92,7 @@ class CountryListItemComponent extends Component {
 
     render() {
         return(
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('CountryOverview', {id: this.state.id})} style={styles.countryLi}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('CountryDetail', {id: this.state.id})} style={styles.countryLi}>
                 <View style={styles.flexColumn}>
                     <Image source={this.imageDecider(this.state.id)} style={styles.image}/>
                     <View style={styles.overlay}/>

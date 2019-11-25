@@ -1,7 +1,6 @@
 import {store} from '../../store';
 import { StackActions, NavigationActions } from 'react-navigation';
 import React, { Component } from 'react';
-import  LocationListItemComponent  from '../list-item/ListItem';
 import {
     Image,
     Platform,
@@ -14,6 +13,7 @@ import {
     View,
 } from 'react-native';
 import {SideSwipeListComponent} from "../side-swipe-list/sideSwipeList";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const styles = StyleSheet.create({
     flexColumn: {
@@ -22,21 +22,21 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#fff'
     },
-    image: {
+    gradient: {
         position: 'absolute',
         resizeMode: 'cover',
         width: '100%',
         height: '100%'
     },
-    overlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: '#404040',
-        opacity: 0.4
-    },
+    // overlay: {
+    //     position: 'absolute',
+    //     top: 0,
+    //     left: 0,
+    //     right: 0,
+    //     bottom: 0,
+    //     backgroundColor: '#404040',
+    //     opacity: 0.4
+    // },
     headSection: {
         height: 250,
         flex: 2,
@@ -89,18 +89,13 @@ const styles = StyleSheet.create({
     },
     locationList: {
     },
-    // subHeader: {
-    //     fontSize: 18,
-    //     color: '#3c4858',
-    //     marginLeft: 20
-    // },
     backButton: {
         margin: 20,
-        // fontSize: 14
+        fontSize: 14
     }
 });
 
-export default class CountryOverviewComponent extends Component {
+export default class LocationOverviewComponent extends Component {
     constructor(props) {
         super(props);
         console.log(props);
@@ -110,12 +105,12 @@ export default class CountryOverviewComponent extends Component {
     }
 
     componentDidMount() {
-        const countryInformation = store.countries[this.state.id];
-        console.log(countryInformation);
-        // const destinationsList = store.locationsOverview[this.state.id];
+        const countryInformation = store.countries.filter(countryObj => countryObj.id === this.state.id)[0];
+        console.log(countryInformation)
+        const destinationsList = store.locations[this.state.id];
         this.setState({
             countryInformation: countryInformation,
-            // destinationsList: destinationsList
+            destinationsList: destinationsList
         })
     }
 
@@ -127,31 +122,32 @@ export default class CountryOverviewComponent extends Component {
         this.props.navigation.dispatch(popAction);
     }
 
-    imageDecider(countryId) {
-        const imagePaths = {
-            thailand: require('../../assets/images/thailand-country-list-image.jpg'),
-            vietnam: require('../../assets/images/vietnam-country-list-image.jpg'),
-            cambodia: require('../../assets/images/cambodia-country-list-image.jpg'),
-            philippines: require('../../assets/images/indonesia-country-list-image.jpg'),
-        };
-        switch(countryId) {
-            case 'thailand':
-                return imagePaths.thailand;
-            case 'vietnam':
-                return imagePaths.vietnam;
-            case 'cambodia':
-                return imagePaths.cambodia;
-            case 'philippines':
-                return imagePaths.philippines;
-        }
-    }
+    // imageDecider(countryId) {
+    //     const imagePaths = {
+    //         thailand: require('../../assets/images/thailand-country-list-image.jpg'),
+    //         vietnam: require('../../assets/images/vietnam-country-list-image.jpg'),
+    //         cambodia: require('../../assets/images/cambodia-country-list-image.jpg'),
+    //         philippines: require('../../assets/images/indonesia-country-list-image.jpg'),
+    //     };
+    //     switch(countryId) {
+    //         case 'thailand':
+    //             return imagePaths.thailand;
+    //         case 'vietnam':
+    //             return imagePaths.vietnam;
+    //         case 'cambodia':
+    //             return imagePaths.cambodia;
+    //         case 'philippines':
+    //             return imagePaths.philippines;
+    //     }
+    // }
 
     render() {
         return(
             <View style={styles.flexColumn}>
                 <View style={styles.headSection}>
-                    <Image source={this.imageDecider(this.state.id)} style={styles.image}/>
-                    <View style={styles.overlay}/>
+                    <LinearGradient style={styles.gradient} colors={['#A8BFFF', '#884D80']}/>
+                    {/*<Image source={this.imageDecider(this.state.id)} style={styles.image}/>*/}
+                    {/*<View style={styles.overlay}/>*/}
                     <TouchableHighlight style={styles.backButton} onPress={() => this.goBack()}>
                         <Text style={styles.whiteFontColor}>Back</Text>
                     </TouchableHighlight>
@@ -162,8 +158,7 @@ export default class CountryOverviewComponent extends Component {
                         <Text style={styles.countryDescriptionText}>{this.state.countryInformation ? this.state.countryInformation.description : ''}</Text>
                         {/*<Text>{this.state.countryInformation ? this.state.countryInformation.currency : ''}</Text>*/}
                         <View style={styles.locationList}>
-                            {this.state.countryInformation ? <SideSwipeListComponent input={{navigationScreen: 'LocationOverview', list: this.state.countryInformation.locationsOverview, listTitle: 'Locations'}}/> : <Text>Loading</Text>}
-                            {/*<FlatList horizontal={true} data={this.state.destinationsList}  keyExtractor={item => item.id} renderItem={({item, index}) => <LocationListItemComponent key={index} listLength={this.state.destinationsList.length} index={index} location={item}/>}/>*/}
+                            {this.state.destinationsList ? <SideSwipeListComponent input={{navigationScreen: 'LocationOverview', list: this.state.destinationsList, listTitle: 'Attractions'}}/> : <Text>Loading</Text>}
                         </View>
                     </View>
                 </View>

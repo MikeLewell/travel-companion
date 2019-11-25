@@ -9,12 +9,13 @@ export class SideSwipeListComponent extends Component {
         super();
         console.log('ss list props: ', props);
         this.state = {
-            list: props.list
+            list: props.list,
+            navigationScreen: props.navigationScreen
         }
     }
     render() {
         return(
-            <FlatList horizontal={true} data={this.state.list}  keyExtractor={item => item.id} renderItem={({item, index}) => <ListItemComponent key={index} listLength={this.state.list.length} index={index} input={item}/>}/>
+            <FlatList horizontal={true} data={this.state.list}  keyExtractor={item => item.id} renderItem={({item, index}) => <ListItemComponent navigationScreen={this.state.navigationScreen} key={index} listLength={this.state.list.length} index={index} input={item}/>}/>
         )
 }
 }

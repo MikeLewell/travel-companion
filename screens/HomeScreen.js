@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
   },
   titleBox: {
     position: 'relative',
-    top: -70,
+    top: -50,
     display: 'flex',
     flexDirection: 'column',
-    margin: 20
+    margin: 30
   },
   button: {
     height: 60,

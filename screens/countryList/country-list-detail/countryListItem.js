@@ -2,17 +2,12 @@ import {store} from '../../../store';
 import React, { Component } from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    FlatList,
     StyleSheet,
     Text,
     TouchableHighlight,
-    TouchableOpacity,
     View,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import {ImageBackground} from "react-native-web";
 
 const styles = StyleSheet.create({
     countryLi: {

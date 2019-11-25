@@ -16,9 +16,6 @@ import {
 import {SideSwipeListComponent} from "../side-swipe-list/sideSwipeList";
 
 const styles = StyleSheet.create({
-    countryLi: {
-        height: 200
-    },
     flexColumn: {
         flex: 1,
         display: 'flex',
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
 
 export default class CountryOverviewComponent extends Component {
     constructor(props) {
-        super();
+        super(props);
         console.log(props);
         this.state = {
             id: this.props.navigation.state.params.id
@@ -166,7 +163,7 @@ export default class CountryOverviewComponent extends Component {
                         {/*<Text>{this.state.countryInformation ? this.state.countryInformation.currency : ''}</Text>*/}
                         <View style={styles.locationList}>
                             <Text style={styles.subHeader}>Locations</Text>
-                            {this.state.destinationsList ? <SideSwipeListComponent list={this.state.destinationsList}/> : <Text>Loading</Text>}
+                            {this.state.destinationsList ? <SideSwipeListComponent navigationScreen={'LocationOverview'} list={this.state.destinationsList}/> : <Text>Loading</Text>}
                             {/*<FlatList horizontal={true} data={this.state.destinationsList}  keyExtractor={item => item.id} renderItem={({item, index}) => <LocationListItemComponent key={index} listLength={this.state.destinationsList.length} index={index} location={item}/>}/>*/}
                         </View>
                     </View>

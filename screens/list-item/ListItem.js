@@ -63,13 +63,14 @@ class ListItemComponent extends Component {
             locationName: props.input.name,
             locationDescription: props.input.description,
             index: props.index,
-            listLength: props.listLength
+            listLength: props.listLength,
+            navigationScreen: props.navigationScreen
         }
     }
 
     render() {
         return(
-            <TouchableHighlight style={[styles.locationBox, this.state.index === 0 ? styles.extendedLeftMargin: '', this.state.index === this.state.listLength - 1 ? styles.extendedRightMargin: '']}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate(this.state.navigationScreen, {id: this.state.id})} style={[styles.locationBox, this.state.index === 0 ? styles.extendedLeftMargin: '', this.state.index === this.state.listLength - 1 ? styles.extendedRightMargin: '']}>
                 <View style={styles.flexColumn}>
                     <Text style={styles.locationTitleText}>{this.state.locationName}</Text>
                     <Text style={styles.locationDescriptionText}>{this.state.locationDescription}</Text>

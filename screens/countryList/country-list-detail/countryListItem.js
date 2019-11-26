@@ -11,8 +11,11 @@ import { withNavigation } from 'react-navigation';
 
 const styles = StyleSheet.create({
     countryLi: {
-        height: 200,
-        margin: 10,
+        height: 150,
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 20,
+        marginRight: 20,
         borderRadius: 6,
         overflow: 'hidden',
         shadowColor: "#000",
